@@ -6,7 +6,7 @@
 /*   By: vscott <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 13:46:10 by vscott            #+#    #+#             */
-/*   Updated: 2019/06/11 16:58:03 by vscott           ###   ########.fr       */
+/*   Updated: 2019/06/13 10:25:57 by vscott           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static t_list	*ft_findfd(t_list **begin, int fd)
 	{
 		while (tmp)
 		{
+			printf("tmp->content_size is :%zu\n", tmp->content_size);//DELETE THIS!!!
 			if (fd == (int)tmp->content_size)
 				return (tmp);
 			tmp = tmp->next;
@@ -30,6 +31,7 @@ static t_list	*ft_findfd(t_list **begin, int fd)
 	}
 		tmp = ft_lstnew("\0", 1);
 		tmp->content_size = fd;
+		printf("tmp->content_size is :%zu\n", tmp->content_size);//DELETE THIS!!!!!!!!
 		ft_lstadd(begin, tmp);
 		return (tmp);
 }
@@ -41,10 +43,7 @@ static char	*ft_freejoin_lst(char *tmp, char *buf)
 	if (/*!tmp || */!buf)
 		return (NULL);
 	fr = tmp;
-//	printf("tmp is %s\n",tmp);// DELETE THIS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//	printf("buf is %s\n",buf);// DELETE THIS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	tmp = ft_strjoin(tmp, buf);
-//	printf("joined tmp is %s\n",tmp);// DELETE THIS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	free(fr);
 	return (tmp);
 }
@@ -57,7 +56,7 @@ static char	*ft_makeline(char **line, char *tmp)
 	nwln = 0;
 	while (tmp[nwln] != '\0' && tmp[nwln] != '\n')
 		nwln++;
-	*line = ft_strsub(tmp, 0, (nwln - 1));
+	*line = ft_strsub(tmp, 0, (nwln));
 	if (ft_strcmp(*line, tmp) == 0)
 		tmp = NULL;
 	else
