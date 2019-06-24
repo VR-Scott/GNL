@@ -23,8 +23,14 @@ int	main(int argc, char **argv)
 	printf("-1\t: Exit\n");
 	while (get_next_line(0, &line) > 0 && (i = ft_atoi(line)) > - 1 && i <= argc)
 	{
+		if(line)
+			ft_strdel(&line);
 		get_next_line(fds[i], &line);
-		printf("%s:\n%s\n",argv[i + 1], line);
+		if(line)
+		{
+			printf("%s:\n%s\n",argv[i + 1], line);
+			ft_strdel(&line);
+		}
 		fi = 0;
 		while (fi < argc - 1)
 		{
@@ -40,7 +46,8 @@ int	main(int argc, char **argv)
 		printf("closing :\t%s\n",argv[i + 1]);
 		i++;
 	}
-	free(fds);
-	free(line);
+	ft_memdel((void**)&fds);
+	ft_strdel(&line);
+	//sleep(45);
 	return (0);
 }
