@@ -6,7 +6,7 @@
 /*   By: vscott <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 13:46:10 by vscott            #+#    #+#             */
-/*   Updated: 2019/06/14 07:39:35 by vscott           ###   ########.fr       */
+/*   Updated: 2019/06/25 16:55:17 by vscott           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char		*ft_makeline(char **line, char *tmp)
 		nwln++;
 	*line = ft_strsub(tmp, 0, (nwln));
 	if (ft_strcmp(*line, tmp) == 0)
-		tmp = NULL;
+		ft_strdel(&tmp);
 	else
 	{
 		fr = tmp;
@@ -72,7 +72,7 @@ int				get_next_line(const int fd, char **line)
 	static t_list	*lst;
 	t_list			*begin;
 
-	if (fd < 0 || !line || read(fd, buf, 0) < 0)
+	if (BUFF_SIZE < 1 || fd < 0 || !line || read(fd, buf, 0) < 0)
 		return (-1);
 	begin = lst;
 	lst = ft_findfd(&begin, fd);

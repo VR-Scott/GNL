@@ -3,28 +3,29 @@
 #include "../get_next_line.h"
 #include "../libft/libft.h"
 
-int	main()
+int	main(int argc, char **argv)
 {
-	char	*filename;
 	int		fd;
 	int		ret;
 	char	*line;
-	int		count;
 
-	filename = "nnl3.txt";
-	fd = open(filename, O_RDONLY);
-
-	if (fd > 2)
+	line = NULL;
+	if (argc == 2)
 	{
-		count = 0;
-		line = NULL;
-		while ((ret = get_next_line(fd, &line)) > 0)
+		fd = open(argv[1], O_RDONLY);
+		if (fd > 2)
 		{
-			count++;
-			printf("line is:\n%s\nret is:\n%d\n", line, ret);
-			if (count > 50)
-				break;
+			while ((ret = get_next_line(fd, &line)) > 0)
+				if (line)
+				{
+					printf("%s\n", line);
+					ft_strdel(&line);
+				}
 		}
+		if (line)
+			ft_strdel(&line);
+		close(fd);
 	}
+	sleep(45);
 	return (0);
 }
