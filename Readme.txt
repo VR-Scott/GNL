@@ -2,6 +2,8 @@ Get Next Line.
 
 C function. Read a line from a specified file descriptor (stdin, stdout or stderr).
 
+For a full description of the project please read resources/get_next_line.en.pdf.
+
 Paramaters:
 The function takes a const int fd(the file descriptor returned by the open function) and a char **line(a pointer to a char pointer used to point towards the a string of a line read from the file).
 
